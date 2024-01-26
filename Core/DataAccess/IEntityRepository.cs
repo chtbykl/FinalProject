@@ -25,10 +25,14 @@ namespace Core.DataAccess
         //(p=> p.CategoryId ==2) buna bir expression denir. bu şartı verebilmemiz için expression kullanırız.
         // filter=null demek, filtre vermeyebilirsin de demektir.
         //eğer filtre vermemişsek tüm datayı istiyoruz demektir
+
         T Get(Expression<Func<T, bool>> filter);
         // List<T> GetByCategory(Category category); buraya artık ihtiacımız yok çümkü en yukarıda zaten kategori filtresi ekleyip istediğimiz kategoridekileri de görebiliyoruz..
+       
         void Add(T entity);
+       
         void Delete(T entity);
+        
         void Update(T entity);
     }
 }

@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace Core.DataAccess.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity,TContext>:IEntityRepository<TEntity>
-        where TEntity : class,IEntity, new() 
-        where TContext : DbContext, new()
+        where TEntity : class,IEntity, new() // tentity mesela product vermiş olalım
+        where TContext : DbContext, new() // tcontext'i de mesela northwindcontext vermiş olalım
     {
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null) //burada parametre olarak göndereceğimiz şey bir lamda(koşul, şart(p=> p.Id ==2))...
         {

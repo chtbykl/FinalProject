@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -69,6 +70,11 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.UnitsInStock = product.UnitsInStock;
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.CategoryId = product.CategoryId;
+        }
+
+        public List<ProductDetailDTO> GetProductDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }

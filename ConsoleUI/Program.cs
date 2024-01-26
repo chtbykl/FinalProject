@@ -9,15 +9,37 @@ namespace ConsoleUI
     internal class Program
     {
         //SOLID
+        //IoC
         static void Main(string[] args)
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
-            
-            foreach (Product p in productManager.GetByUnitPrice(50,100))
+            ProductsTest();
+
+            //CategoriesTest();
+
+
+
+        }
+
+        private static void CategoriesTest()
+        {
+            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+
+            foreach (var c in categoryManager.GetAll())
             {
-                Console.WriteLine(p.ProductName);
+                Console.WriteLine(c.CategoryName);
             }
 
+            Console.WriteLine(categoryManager.GetById(3).CategoryName) ;
+        }
+
+        private static void ProductsTest()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+
+            foreach (var p in productManager.GetProductDetails())
+            {
+                Console.WriteLine(p.ProductName + " / " + p.CategoryName );
+            }
         }
     }
 }
