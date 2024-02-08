@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        List<Product> GetAll();
-        List<Product> GetByCategoryId(int id);
-        List<Product> GetByUnitPrice(decimal minPrice, decimal maxPrice);
-        List<ProductDetailDTO> GetProductDetails();
+        IDataResult<List<Product>> GetAll();
+        IDataResult<List<Product>> GetByCategoryId(int id);
+        IDataResult<List<Product>> GetByUnitPrice(decimal minPrice, decimal maxPrice);
+        IDataResult<List<ProductDetailDTO>> GetProductDetails();
+        IDataResult<Product> GetById(int id);
+        IResult add(Product product);
     }
 }
