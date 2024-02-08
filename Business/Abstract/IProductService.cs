@@ -17,5 +17,5 @@ namespace Business.Abstract
         IDataResult<List<ProductDetailDTO>> GetProductDetails();
         IDataResult<Product> GetById(int id);
         IResult add(Product product);
-    }
+    } // Restfull --> HTTP protokolü-->
 }
