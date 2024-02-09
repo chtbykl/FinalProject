@@ -14,6 +14,8 @@ namespace WebAPI
 
             // Add services to the container.
 
+            //AOP
+            //Autofac,Ninject, CastleWindsor, StructreMap,LightInject, DryInject
             builder.Services.AddSingleton<IProductService,ProductManager>(); // birisi senden IProductService isterse sen ona arka planda bir ProductManager oluþtur ve ona ver
             // bu singleton sayesinde referansý bir milyon tane client te kullansa hepsine ayný referans verilir böylece bir milyon tane referans üretmek zorunda kalmayýz
             //tabi bu sigleton'u productmanager da veri(data) tutmuyorsak bir referans oluþtururuz

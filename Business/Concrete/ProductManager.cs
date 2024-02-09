@@ -40,6 +40,10 @@ namespace Business.Concrete
         public IDataResult<List<Product>> GetAll()
         {
             //iş kodları
+            if (DateTime.Now.Hour==20)
+            {
+                return new ErrorDataResult<List<Product>>("bakım saati, lütfen daha sonra tekrar deneyiniz");
+            }
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(),"ürünler listelendi") ;
         }
 

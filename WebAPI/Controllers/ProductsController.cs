@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -21,12 +22,17 @@ namespace WebAPI.Controllers
             _productService = productService;
         }
         [HttpGet]
-        public List<Product> Get()
+        public IActionResult Get()
         {
             // dependency chain -- bağımlılık zinciri-- biz product service o da ef productdal'a bağımlı halde şuan, oyüzden bu kodu refactor edicez..
             
             var result = _productService.GetAll();
-            return result.Data;
+
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
 
 
         }
