@@ -21,8 +21,8 @@ namespace WebAPI.Controllers
         {
             _productService = productService;
         }
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
             // dependency chain -- bağımlılık zinciri-- biz product service o da ef productdal'a bağımlı halde şuan, oyüzden bu kodu refactor edicez..
             
@@ -35,6 +35,28 @@ namespace WebAPI.Controllers
             return BadRequest(result);
 
 
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id) 
+        {
+            var result = _productService.GetById(id);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Product product)
+        {
+            var result = _productService.add(product);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
