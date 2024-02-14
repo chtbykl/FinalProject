@@ -1,6 +1,9 @@
 
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
+using Business.DependencyResolvers.Autofac;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 
@@ -14,13 +17,18 @@ namespace WebAPI
 
             // Add services to the container.
 
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()) // bu ben kendi yazdýðým konfigürasyon sýnýfýný kullanacaðým anlamýna geliyor
+                .ConfigureContainer<ContainerBuilder>(builder =>
+                {
+                    builder.RegisterModule(new AutofacBusinessModele());
+                });
             //AOP
             //Autofac,Ninject, CastleWindsor, StructreMap,LightInject, DryInject
-            builder.Services.AddSingleton<IProductService,ProductManager>(); // birisi senden IProductService isterse sen ona arka planda bir ProductManager oluþtur ve ona ver
+            //builder.Services.AddSingleton<IProductService, ProductManager>(); // birisi senden IProductService isterse sen ona arka planda bir ProductManager oluþtur ve ona ver
             // bu singleton sayesinde referansý bir milyon tane client te kullansa hepsine ayný referans verilir böylece bir milyon tane referans üretmek zorunda kalmayýz
             //tabi bu sigleton'u productmanager da veri(data) tutmuyorsak bir referans oluþtururuz
             // örneðin product managerda bir müþteri sepeti datasý tutuluyorsa, kim ne ekliyosa ayný sepete eklenir, herkesin sepeti birbirine girer
-            builder.Services.AddSingleton<IProductDal, EfProductDal>();
+            //builder.Services.AddSingleton<IProductDal, EfProductDal>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
