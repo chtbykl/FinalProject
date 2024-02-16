@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -32,7 +33,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == id));
         }
 
-        [Validate]
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult add(Product product)
         {
             //validation
@@ -40,9 +41,6 @@ namespace Business.Concrete
             // float validation
 
             //cross cutting concerns: log, cache, transaction, authorization, validation, ...
-
-
-            ValidationTool.Validate(new ProductValidator(), product);
 
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
