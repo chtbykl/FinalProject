@@ -5,18 +5,17 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
 using FluentValidation;
 using ValidationException = FluentValidation.ValidationException;
 
-namespace Core.CrossCuttingConcerns.Validation
+namespace Core.CrossCuttingConcerns.Validation.FluentValidation
 {
     public static class ValidationTool
     {
-        public static void Validate(IValidator validator,object entity)
+        public static void Validate(IValidator validator, object entity)
         {
             var context = new ValidationContext<object>(entity);
-            
+
             var result = validator.Validate(context);
             if (!result.IsValid)
             {

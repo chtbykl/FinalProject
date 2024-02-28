@@ -19,10 +19,10 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.UnitPrice).GreaterThan(0);
             RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(5).When(p => p.CategoryId == 1);
 
-            RuleFor(p => p.ProductName).Must(SwatrWithA).WithMessage("Ürün isimlendirmesi 'A' ile başlamalı");
+            RuleFor(p => p.ProductName).Must(StartsWithA).WithMessage("Ürün isimlendirmesi 'A' ile başlamalı");
         }
 
-        private bool SwatrWithA(string arg)
+        private bool StartsWithA(string arg)
         {
             return arg.StartsWith("A");
         }
