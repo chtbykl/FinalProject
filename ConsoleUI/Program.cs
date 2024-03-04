@@ -24,17 +24,17 @@ namespace ConsoleUI
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
-            foreach (var c in categoryManager.GetAll())
+            foreach (var c in categoryManager.GetAll().Data)
             {
                 Console.WriteLine(c.CategoryName);
             }
 
-            Console.WriteLine(categoryManager.GetById(3).CategoryName) ;
+            Console.WriteLine(categoryManager.GetById(3).Data.CategoryName) ;
         }
 
         private static void ProductsTest()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
 
             foreach (var p in productManager.GetProductDetails().Data)
             {
